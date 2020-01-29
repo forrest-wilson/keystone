@@ -198,6 +198,15 @@ class ListRow extends Component {
       },
     ];
 
+    // Personal workaround for getting an image url into AdminUI
+    if (item.__typename === 'Image' && item.hasOwnProperty('image')) {
+      items.push({
+        content: 'Copy Image Url',
+        icon: <LinkIcon />,
+        onClick: () => copyToClipboard(item.image.publicUrl)
+      })
+    }
+
     return (
       <TableRow>
         <BodyCell isSelected={isSelected} key="checkbox">
